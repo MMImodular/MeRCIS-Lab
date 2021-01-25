@@ -14620,6 +14620,32 @@ R2 3 2 {val-val*var/100}
 <wire x1="4.1275" y1="-2.8575" x2="4.1275" y2="2.8575" width="0.127" layer="39"/>
 <wire x1="4.1275" y1="2.8575" x2="-4.1275" y2="2.8575" width="0.127" layer="39"/>
 </package>
+<package name="VSSOP-10">
+<smd name="1" x="-2.2" y="1" dx="0.3" dy="1.45" layer="1" roundness="33" rot="R90"/>
+<smd name="2" x="-2.2" y="0.5" dx="0.3" dy="1.45" layer="1" roundness="33" rot="R90"/>
+<smd name="3" x="-2.2" y="0" dx="0.3" dy="1.45" layer="1" roundness="33" rot="R90"/>
+<smd name="4" x="-2.2" y="-0.5" dx="0.3" dy="1.45" layer="1" roundness="33" rot="R90"/>
+<smd name="5" x="-2.2" y="-1" dx="0.3" dy="1.45" layer="1" roundness="33" rot="R90"/>
+<smd name="6" x="2.2" y="-1" dx="0.3" dy="1.45" layer="1" roundness="33" rot="R270"/>
+<smd name="7" x="2.2" y="-0.5" dx="0.3" dy="1.45" layer="1" roundness="33" rot="R270"/>
+<smd name="8" x="2.2" y="0" dx="0.3" dy="1.45" layer="1" roundness="33" rot="R270"/>
+<smd name="9" x="2.2" y="0.5" dx="0.3" dy="1.45" layer="1" roundness="33" rot="R270"/>
+<smd name="10" x="2.2" y="1" dx="0.3" dy="1.45" layer="1" roundness="33" rot="R270"/>
+<circle x="-2.8" y="1" radius="0.070709375" width="0" layer="21"/>
+<wire x1="1.55" y1="1.55" x2="1.55" y2="-1.55" width="0.127" layer="51"/>
+<wire x1="1.55" y1="-1.55" x2="-1.55" y2="-1.55" width="0.127" layer="51"/>
+<wire x1="-1.55" y1="-1.55" x2="-1.55" y2="1.55" width="0.127" layer="51"/>
+<wire x1="-1.55" y1="1.55" x2="1.55" y2="1.55" width="0.127" layer="51"/>
+<wire x1="-1.55" y1="1.25" x2="-1.55" y2="1.55" width="0.127" layer="21"/>
+<wire x1="-1.55" y1="1.55" x2="1.55" y2="1.55" width="0.127" layer="21"/>
+<wire x1="1.55" y1="1.55" x2="1.55" y2="1.25" width="0.127" layer="21"/>
+<wire x1="-1.55" y1="-1.25" x2="-1.55" y2="-1.55" width="0.127" layer="21"/>
+<wire x1="-1.55" y1="-1.55" x2="1.55" y2="-1.55" width="0.127" layer="21"/>
+<wire x1="1.55" y1="-1.55" x2="1.55" y2="-1.25" width="0.127" layer="21"/>
+<text x="-2.95" y="1.75" size="1.27" layer="21">&gt;Name</text>
+<text x="-2.9" y="-3.05" size="1.27" layer="27">&gt;Value</text>
+<rectangle x1="-3.1" y1="-1.75" x2="3.1" y2="1.75" layer="39"/>
+</package>
 </packages>
 <symbols>
 <symbol name="AD5551">
@@ -14638,6 +14664,24 @@ R2 3 2 {val-val*var/100}
 <text x="-5.08" y="7.62" size="1.778" layer="95">&gt;Name</text>
 <text x="-5.08" y="-8.89" size="1.778" layer="96">&gt;Value</text>
 </symbol>
+<symbol name="ADS8319">
+<pin name="REFIN" x="-15.24" y="5.08" length="middle" direction="in"/>
+<pin name="+VA" x="-15.24" y="2.54" length="middle" direction="pwr"/>
+<pin name="+IN" x="-15.24" y="0" length="middle" direction="in"/>
+<pin name="-IN" x="-15.24" y="-2.54" length="middle" direction="in"/>
+<pin name="GND" x="-15.24" y="-5.08" length="middle" direction="pwr"/>
+<pin name="CONVST" x="15.24" y="-5.08" length="middle" rot="R180"/>
+<pin name="SDO" x="15.24" y="-2.54" length="middle" rot="R180"/>
+<pin name="SCLK" x="15.24" y="0" length="middle" rot="R180"/>
+<pin name="SDI" x="15.24" y="2.54" length="middle" rot="R180"/>
+<pin name="+VBD" x="15.24" y="5.08" length="middle" direction="pwr" rot="R180"/>
+<wire x1="-10.16" y1="7.62" x2="10.16" y2="7.62" width="0.1524" layer="94"/>
+<wire x1="10.16" y1="7.62" x2="10.16" y2="-7.62" width="0.1524" layer="94"/>
+<wire x1="10.16" y1="-7.62" x2="-10.16" y2="-7.62" width="0.1524" layer="94"/>
+<wire x1="-10.16" y1="-7.62" x2="-10.16" y2="7.62" width="0.1524" layer="94"/>
+<text x="-5.08" y="7.62" size="1.778" layer="95">&gt;Name</text>
+<text x="-5.08" y="-10.16" size="1.778" layer="96">&gt;Value</text>
+</symbol>
 </symbols>
 <devicesets>
 <deviceset name="AD5551" prefix="IC" uservalue="yes">
@@ -14655,6 +14699,30 @@ R2 3 2 {val-val*var/100}
 <connect gate="G$1" pin="VOUT" pad="P$1"/>
 <connect gate="G$1" pin="VREF" pad="P$3"/>
 <connect gate="G$1" pin="~CS" pad="P$4"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="ADS8319">
+<gates>
+<gate name="G$1" symbol="ADS8319" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="VSSOP-10">
+<connects>
+<connect gate="G$1" pin="+IN" pad="3"/>
+<connect gate="G$1" pin="+VA" pad="2"/>
+<connect gate="G$1" pin="+VBD" pad="10"/>
+<connect gate="G$1" pin="-IN" pad="4"/>
+<connect gate="G$1" pin="CONVST" pad="6"/>
+<connect gate="G$1" pin="GND" pad="5"/>
+<connect gate="G$1" pin="REFIN" pad="1"/>
+<connect gate="G$1" pin="SCLK" pad="8"/>
+<connect gate="G$1" pin="SDI" pad="9"/>
+<connect gate="G$1" pin="SDO" pad="7"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -14856,6 +14924,7 @@ R2 3 2 {val-val*var/100}
 <part name="R5" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="POTENTIOMETER_" device="PT_SPIN" package3d_urn="urn:adsk.eagle:package:23782/1" value="5k"/>
 <part name="GND26" library="supply1" deviceset="GND" device=""/>
 <part name="IC7" library="MeRCIS Lab Parts" deviceset="AD5551" device=""/>
+<part name="U$1" library="MeRCIS Lab Parts" deviceset="ADS8319" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -16685,6 +16754,10 @@ Case Western Reserve University</text>
 <attribute name="NAME" x="138.176" y="216.535" size="1.778" layer="95"/>
 <attribute name="VALUE" x="138.176" y="211.709" size="1.778" layer="96"/>
 </instance>
+<instance part="U$1" gate="G$1" x="256.54" y="228.6" smashed="yes">
+<attribute name="NAME" x="251.46" y="236.22" size="1.778" layer="95"/>
+<attribute name="VALUE" x="251.46" y="218.44" size="1.778" layer="96"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -16692,9 +16765,13 @@ Case Western Reserve University</text>
 <net name="GND" class="0">
 <segment>
 <pinref part="GND6" gate="1" pin="GND"/>
+<junction x="241.3" y="223.52"/>
+<pinref part="U$1" gate="G$1" pin="GND"/>
+<pinref part="U$1" gate="G$1" pin="-IN"/>
+<wire x1="241.3" y1="226.06" x2="241.3" y2="223.52" width="0.1524" layer="91"/>
+<junction x="241.3" y="223.52"/>
 <wire x1="233.68" y1="213.36" x2="233.68" y2="223.52" width="0.1524" layer="91"/>
-<wire x1="233.68" y1="223.52" x2="233.68" y2="226.06" width="0.1524" layer="91"/>
-<junction x="233.68" y="223.52"/>
+<wire x1="233.68" y1="223.52" x2="241.3" y2="223.52" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="GND8" gate="1" pin="GND"/>
@@ -16836,7 +16913,8 @@ Case Western Reserve University</text>
 <wire x1="193.04" y1="228.6" x2="210.82" y2="228.6" width="0.1524" layer="91"/>
 <wire x1="210.82" y1="226.06" x2="210.82" y2="228.6" width="0.1524" layer="91"/>
 <pinref part="D1" gate="G$1" pin="C1A2"/>
-<wire x1="233.68" y1="228.6" x2="210.82" y2="228.6" width="0.1524" layer="91"/>
+<pinref part="U$1" gate="G$1" pin="+IN"/>
+<wire x1="210.82" y1="228.6" x2="241.3" y2="228.6" width="0.1524" layer="91"/>
 <junction x="210.82" y="228.6"/>
 </segment>
 </net>
@@ -16862,15 +16940,26 @@ Case Western Reserve University</text>
 <pinref part="C8" gate="G$1" pin="1"/>
 <wire x1="243.84" y1="261.62" x2="243.84" y2="264.16" width="0.1524" layer="91"/>
 <wire x1="243.84" y1="264.16" x2="254" y2="264.16" width="0.1524" layer="91"/>
-<wire x1="233.68" y1="231.14" x2="233.68" y2="264.16" width="0.1524" layer="91"/>
+<wire x1="233.68" y1="231.14" x2="233.68" y2="233.68" width="0.1524" layer="91"/>
+<wire x1="233.68" y1="233.68" x2="233.68" y2="264.16" width="0.1524" layer="91"/>
 <wire x1="233.68" y1="264.16" x2="243.84" y2="264.16" width="0.1524" layer="91"/>
 <junction x="243.84" y="264.16"/>
 <pinref part="+5V" gate="G$1" pin="VDD"/>
 <wire x1="243.84" y1="269.24" x2="243.84" y2="264.16" width="0.1524" layer="91"/>
-<wire x1="279.4" y1="231.14" x2="279.4" y2="264.16" width="0.1524" layer="91"/>
+<wire x1="279.4" y1="233.68" x2="279.4" y2="264.16" width="0.1524" layer="91"/>
 <wire x1="279.4" y1="264.16" x2="254" y2="264.16" width="0.1524" layer="91"/>
 <junction x="254" y="264.16"/>
 <label x="246.38" y="266.7" size="1.778" layer="95"/>
+<pinref part="U$1" gate="G$1" pin="REFIN"/>
+<wire x1="233.68" y1="233.68" x2="241.3" y2="233.68" width="0.1524" layer="91"/>
+<junction x="233.68" y="233.68"/>
+<pinref part="U$1" gate="G$1" pin="+VA"/>
+<wire x1="233.68" y1="231.14" x2="241.3" y2="231.14" width="0.1524" layer="91"/>
+<pinref part="U$1" gate="G$1" pin="+VBD"/>
+<wire x1="271.78" y1="233.68" x2="279.4" y2="233.68" width="0.1524" layer="91"/>
+<pinref part="U$1" gate="G$1" pin="SDI"/>
+<wire x1="271.78" y1="231.14" x2="271.78" y2="233.68" width="0.1524" layer="91"/>
+<junction x="271.78" y="233.68"/>
 </segment>
 </net>
 <net name="N$3" class="0">
@@ -16882,6 +16971,8 @@ Case Western Reserve University</text>
 <wire x1="261.62" y1="193.04" x2="261.62" y2="190.5" width="0.1524" layer="91"/>
 <junction x="261.62" y="190.5"/>
 <wire x1="279.4" y1="223.52" x2="279.4" y2="190.5" width="0.1524" layer="91"/>
+<pinref part="U$1" gate="G$1" pin="CONVST"/>
+<wire x1="279.4" y1="223.52" x2="271.78" y2="223.52" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$4" class="0">
@@ -16893,7 +16984,8 @@ Case Western Reserve University</text>
 <wire x1="261.62" y1="165.1" x2="261.62" y2="162.56" width="0.1524" layer="91"/>
 <junction x="261.62" y="162.56"/>
 <wire x1="292.1" y1="162.56" x2="292.1" y2="228.6" width="0.1524" layer="91"/>
-<wire x1="292.1" y1="228.6" x2="279.4" y2="228.6" width="0.1524" layer="91"/>
+<wire x1="292.1" y1="228.6" x2="271.78" y2="228.6" width="0.1524" layer="91"/>
+<pinref part="U$1" gate="G$1" pin="SCLK"/>
 </segment>
 </net>
 <net name="N$8" class="0">
@@ -16902,8 +16994,9 @@ Case Western Reserve University</text>
 <wire x1="297.18" y1="226.06" x2="304.8" y2="226.06" width="0.1524" layer="91"/>
 <wire x1="297.18" y1="228.6" x2="297.18" y2="226.06" width="0.1524" layer="91"/>
 <pinref part="IC1" gate="F" pin="I"/>
-<wire x1="279.4" y1="226.06" x2="297.18" y2="226.06" width="0.1524" layer="91"/>
+<wire x1="271.78" y1="226.06" x2="297.18" y2="226.06" width="0.1524" layer="91"/>
 <junction x="297.18" y="226.06"/>
+<pinref part="U$1" gate="G$1" pin="SDO"/>
 </segment>
 </net>
 <net name="N$33" class="0">
