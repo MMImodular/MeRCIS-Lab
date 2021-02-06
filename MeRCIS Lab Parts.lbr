@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.6.1">
+<eagle version="9.6.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -7948,7 +7948,7 @@ Source: http://www.vishay.com .. dcrcw.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="ADS8319">
+<deviceset name="ADS8319" prefix="IC">
 <gates>
 <gate name="G$1" symbol="ADS8319" x="0" y="0"/>
 </gates>
@@ -8544,7 +8544,7 @@ male, 15 high current pins, single, type H, rows DZ</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="ASSR-1530_SSR" uservalue="yes">
+<deviceset name="ASSR-1530_SSR" prefix="IC" uservalue="yes">
 <gates>
 <gate name="G$1" symbol="ASSR-1530_OK-TR" x="2.54" y="7.62"/>
 </gates>
@@ -8768,7 +8768,7 @@ General-purpose diode for high-speed switching</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="SF_ISC03_DC_DC">
+<deviceset name="SF_ISC03_DC_DC" prefix="IC">
 <gates>
 <gate name="G$1" symbol="SF_ISC03_ISC03" x="0" y="0"/>
 </gates>
