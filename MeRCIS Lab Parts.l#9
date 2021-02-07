@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.6.2">
+<eagle version="9.6.1">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -44,7 +44,7 @@
 <layer number="34" name="bFinish" color="6" fill="6" visible="no" active="yes"/>
 <layer number="35" name="tGlue" color="7" fill="4" visible="no" active="yes"/>
 <layer number="36" name="bGlue" color="7" fill="5" visible="no" active="yes"/>
-<layer number="37" name="tTest" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="37" name="tTest" color="7" fill="1" visible="no" active="yes"/>
 <layer number="38" name="bTest" color="7" fill="1" visible="no" active="yes"/>
 <layer number="39" name="tKeepout" color="4" fill="11" visible="yes" active="yes"/>
 <layer number="40" name="bKeepout" color="1" fill="11" visible="yes" active="yes"/>
@@ -7091,24 +7091,6 @@ NS Package M08A</description>
 <text x="-5.334" y="-2.921" size="1.27" layer="25" ratio="10" rot="R90">&gt;NAME</text>
 <text x="-3.556" y="-0.635" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
 </package>
-<package name="C0306">
-<smd name="P$1" x="-0.41" y="0" dx="0.51" dy="1.52" layer="1"/>
-<smd name="P$2" x="0.41" y="0" dx="0.51" dy="1.52" layer="1"/>
-<wire x1="-1.1" y1="0.8" x2="-1.1" y2="-0.8" width="0" layer="39"/>
-<wire x1="-1.1" y1="-0.8" x2="1.1" y2="-0.8" width="0" layer="39"/>
-<wire x1="1.1" y1="-0.8" x2="1.1" y2="0.8" width="0" layer="39"/>
-<wire x1="1.1" y1="0.8" x2="-1.1" y2="0.8" width="0" layer="39"/>
-<circle x="-0.61818125" y="0.7086625" radius="0.0198375" width="0" layer="21"/>
-<rectangle x1="-0.4" y1="-0.8" x2="-0.28" y2="0.8" layer="51"/>
-<rectangle x1="0.28" y1="-0.8" x2="0.4" y2="0.8" layer="51"/>
-<wire x1="-0.28" y1="0.79" x2="0.28" y2="0.79" width="0.0254" layer="51"/>
-<wire x1="0.28" y1="0.79" x2="0.28" y2="-0.79" width="0" layer="51"/>
-<wire x1="0.28" y1="-0.79" x2="-0.28" y2="-0.79" width="0.0254" layer="51"/>
-<wire x1="-0.28" y1="-0.79" x2="-0.28" y2="0.79" width="0" layer="51"/>
-<text x="-0.67" y="0.84" size="0.3048" layer="25">&gt;Name</text>
-<text x="-0.67" y="0.84" size="0.3048" layer="25">&gt;Name</text>
-<text x="-0.67" y="-1.13" size="0.3048" layer="27">&gt;Value</text>
-</package>
 </packages>
 <packages3d>
 <package3d name="C0402" urn="urn:adsk.eagle:package:23626/1" type="box">
@@ -8216,15 +8198,6 @@ Source: http://www.vishay.com .. dcrcw.pdf</description>
 </technology>
 </technologies>
 </device>
-<device name="" package="C0306">
-<connects>
-<connect gate="G$1" pin="1" pad="P$1"/>
-<connect gate="G$1" pin="2" pad="P$2"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
 </devices>
 <spice>
 <pinmapping spiceprefix="C">
@@ -8544,7 +8517,7 @@ male, 15 high current pins, single, type H, rows DZ</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="ASSR-1530_SSR" prefix="IC" uservalue="yes">
+<deviceset name="ASSR-1530_SSR" uservalue="yes">
 <gates>
 <gate name="G$1" symbol="ASSR-1530_OK-TR" x="2.54" y="7.62"/>
 </gates>
@@ -8768,7 +8741,7 @@ General-purpose diode for high-speed switching</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="SF_ISC03_DC_DC" prefix="IC">
+<deviceset name="SF_ISC03_DC_DC">
 <gates>
 <gate name="G$1" symbol="SF_ISC03_ISC03" x="0" y="0"/>
 </gates>
