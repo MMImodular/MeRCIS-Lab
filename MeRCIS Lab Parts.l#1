@@ -7948,7 +7948,7 @@ Source: http://www.vishay.com .. dcrcw.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="ADS8319">
+<deviceset name="ADS8319" prefix="IC">
 <gates>
 <gate name="G$1" symbol="ADS8319" x="0" y="0"/>
 </gates>

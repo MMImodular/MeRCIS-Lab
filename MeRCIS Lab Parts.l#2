@@ -8768,7 +8768,7 @@ General-purpose diode for high-speed switching</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="SF_ISC03_DC_DC">
+<deviceset name="SF_ISC03_DC_DC" prefix="IC">
 <gates>
 <gate name="G$1" symbol="SF_ISC03_ISC03" x="0" y="0"/>
 </gates>
