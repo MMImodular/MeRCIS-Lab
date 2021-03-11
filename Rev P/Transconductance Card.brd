@@ -6927,11 +6927,11 @@ Note, that not all DRC settings must be set by the manufacturer. Several can be 
 <approved hash="20,16,37c53fc254ed260c"/>
 <approved hash="20,16,4c50c6112651a670"/>
 <approved hash="20,16,948ae182987a5e1d"/>
-<approved hash="20,1,37c53fc254ed260c"/>
 <approved hash="20,1,4c50c6112651a670"/>
 <approved hash="20,1,948ae182987a5e1d"/>
 <approved hash="20,16,41214370d3170e4e"/>
 <approved hash="20,1,ce599904272098cf"/>
+<approved hash="20,1,57acdf73320aed15"/>
 </errors>
 </board>
 </drawing>
