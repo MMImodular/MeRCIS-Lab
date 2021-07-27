@@ -1,4 +1,4 @@
-m
+
 /*
 This code is designed to run on an Arduino Nano Every with the transconductance card tester
 */ 
@@ -11,27 +11,26 @@ const int H_NEG = 2;
 const int H_POS = 3;
 const int H_EN = 4;
 const int ADC_CS = 8;
-const int scene1 = 5;
-const int scene2 = 6;
-const int scene3 = 7;
+const int button1 = 5;
+const int button2 = 6;
+const int button3 = 7;
 
 //Dac Max Value
 const int dacMax14 = 16383; //14 bit maximum value
-const int dacMax12 = 4096;
+const int dacMax12 = 4095; //12 bit maximum value
+int dacMax = dacMax14;
 
 //Variables
 int dacOut = 0;
-int dacType = 0;
-int dacMax = 16383;
 uint16_t sense;
 float tx;
 int sceneCounter1 = 0;
 int sceneCounter2 = 0;
 int sceneCounter3 = 0;
-int sinCounter = 0;
-uint16_t dacPrimaryByte = 0;
+int currentScene = 1;
 
 //Boolean Checks
+bool dac14 = true; //used to determine which DAC is present (true = 14 bit, false = 12 bit)
 bool sc1Change = false;
 bool sc2Change = false;
 bool sc3Change = false;
@@ -41,7 +40,6 @@ bool firstTime = true;
 //It cannot read very fast.
 SPISettings DAC_SETTINGS = SPISettings(1000000, MSBFIRST, SPI_MODE0);
 SPISettings ADC_SETTINGS = SPISettings(125000, MSBFIRST, SPI_MODE0);
-
 
 //Setup----------------------------------------------------------------------------------------------------------------------------------------
 void setup() {
@@ -70,13 +68,23 @@ void setup() {
   digitalWrite(L_DAC, LOW);
 
   //Create interrupts for scene selection
-  attachInterrupt(digitalPinToInterrupt(scene1), incSC1, FALLING);
-  attachInterrupt(digitalPinToInterrupt(scene2), incSC2, FALLING);
-  attachInterrupt(digitalPinToInterrupt(scene3), incSC3, FALLING);
+  attachInterrupt(digitalPinToInterrupt(button1), incSC1, FALLING);
+  attachInterrupt(digitalPinToInterrupt(button2), incSC2, FALLING);
+  attachInterrupt(digitalPinToInterrupt(button3), dacSelect, FALLING);
 }
 
 //Begin Loop ---------------------------------------------------------------------------------------------------------------------------------
 void loop() {
+  /*
+    setDirection(true);
+    //rising
+    setDac(dacMax);
+    delay(5000);
+    //falling
+    setDac(0);
+    delay(5000);
+
+  //ugly if else that works
     //Triangle functions for Scene 1
     if(sceneCounter1 == 0 && sc1Change == true) {
       fastTriangle();
@@ -105,25 +113,70 @@ void loop() {
     if(sceneCounter2 == 3 && sc2Change == true) {
       PWM10();
     }
+    */
 
-    //SIN function on Scene 3
-    if(sceneCounter3 == 1 && sc3Change == true) { 
-      calPal();
-    }
+  //Gonna try switch cases here
+  //First switch is used to determine the scene which is currently active
+  //This is to differentiate between sets of functions
+  switch (currentScene) {
     
-    firstTime = false; //Used to check if cycle is running for the first time since button has been pressed, reset every main loop so it is only True after interrupt
+    //First case is for Scene 1, featuring triangle outputs
+    //This is helpful for checking nonlinearity behavior
+    case 1:
+      switch (sceneCounter1) {
+        case 0:
+          fastTriangle();
+          break;
+        case 1:
+          posTriangle();
+          break;
+        case 2:
+          negTriangle();
+          break;
+        case 3:
+          biTriangle();
+          break;
+        default:
+          setDac(0);
+          break;
+      }
+    
+    //Second case is for Scene 2, featuring various PWM functions
+    //These are helpful for determining rise/fall times as well as time delay between DAC and amp output
+    case 2:
+      switch (sceneCounter2) {
+        case 0:
+          setDac(0);
+          break;
+        case 1:
+          PWM50();
+          break;
+        case 2:
+          PWM25();
+          break;
+        case 3:
+          PWM10();
+          break;
+        default:
+          setDac(0);
+          break;
+      }
+  }
+  
+  //firstTime is used to check if the chosen function is running for the first time since a button has been pressed 
+  //Must be reset every main loop so it is only True after interrupt
+  firstTime = false; 
 }
 //End Loop ----------------------------------------------------------------------------------------------------------------------------------
-
-
-
 
 //Interrupts---------------------------------------------------------------------------------------------------------------------------------
 void incSC1() {
   sceneCounter1++;
-  sc1Change = true;
-  sc2Change = false;
-  sc3Change = false;
+  currentScene = 1;
+  //sc1Change = true;
+  //sc2Change = false;
+  //sc3Change = false;
+  
   firstTime = true;
   if(sceneCounter1 > 3) {
     sceneCounter1 = 0;
@@ -132,52 +185,46 @@ void incSC1() {
 
 void incSC2() {
   sceneCounter2++;
-  sc1Change = false;
-  sc2Change = true;
-  sc3Change = false;
+  currentScene = 2;
+  //sc1Change = false;
+  //sc2Change = true;
+  //sc3Change = false;
+  
   firstTime = true;
   if(sceneCounter2 > 3) {
     sceneCounter2 = 0;
   }
 }
 
-void incSC3() {
-  sceneCounter3++;
-  sc1Change = false;
-  sc2Change = false;
-  sc3Change = true;
-  firstTime = true;
-  if(sceneCounter3 > 3) {
-    sceneCounter3 = 0;
+void dacSelect() {
+  dac14 = !dac14;
+  if (dac14 == true) {
+    dacMax = dacMax14;
+  }
+  else {
+    dacMax = dacMax12;
   }
 }
 
-
 //DAC write function------------------------------------------------------------------------------------------------------------------------
 void setDac(int value) {
-  digitalWrite(DAC_CS, LOW);
+  //Convert integer to unsigned 16 bit value (Maximum of 14 bits actually used)
+  uint16_t dacPrimaryByte = value;
   
-  //New 14 bit dac
-  if (dacType == 0) {
-    dacMax = dacMax14;
-    //Convert integer to unsigned 16 bit value (only 14 bits actually used)
-    dacPrimaryByte = value;
-    SPI.transfer16(dacPrimaryByte);
+  //if using the 12 bit DAC you must alter the primary byte a bit
+  if(dac14 == false) {
+    dacPrimaryByte &= 0x0FFF; //limit scope of data to 12 bits
+    dacPrimaryByte |= 0x3000; //apply necessary setup bits for the DAC
   }
-  //Old 12 bit dac
-  //This part is giving me trouble
-  if (dacType == 1) {
-    dacMax = dacMax12;
-    //Set up data
-    byte dacRegister = 0b00110000;
-    int dacSecondaryByteMask = 0b0000000011111111;
-    dacPrimaryByte = (value >> 8) | dacRegister;
-    byte dacSecondaryByte = value & dacSecondaryByteMask;
-    SPI.transfer(dacPrimaryByte);
-    SPI.transfer(dacSecondaryByte);
-  }
- 
+  
+  //Send data to the DAC
+  SPI.beginTransaction(DAC_SETTINGS);
+  noInterrupts();
+  digitalWrite(DAC_CS, LOW);
+  SPI.transfer16(dacPrimaryByte);
   digitalWrite(DAC_CS, HIGH);
+  interrupts();
+  SPI.endTransaction();
 }
 
 //ADC read function-------------------------------------------------------------------------------------------------------------------------
@@ -277,7 +324,7 @@ void PWM50() {
   }
   setDac(0);
   delay(50);
-  setDac(dacMax);
+  setDac(4095);
   delay(50);
 }
 
@@ -287,7 +334,7 @@ void PWM25() {
   }
   setDac(0);
   delay(75);
-  setDac(dacMax);
+  setDac(4095);
   delay(25);
 }
 
@@ -297,16 +344,6 @@ void PWM10() {
   }
   setDac(0);
   delay(90);
-  setDac(dacMax);
+  setDac(4095);
   delay(10);
-}
-
-void calPal() {
-  if (firstTime == true) {
-    setDirection(true);
-  }
-  setDac(0);
-  delay(3000);
-  setDac(dacMax);
-  delay(3000);
 }
